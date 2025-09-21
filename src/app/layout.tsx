@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from "../contexts/authContext";
+import Link from "next/link";
+import { Home, User } from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +30,23 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
+        <nav className="flex justify-around p-4 text-center text-sm text-gray-500 bg-neutral-800 fixed bottom-0 w-full">
+          <Link href={"/home"} className="text-white" title="Home">
+            <Home />
+          </Link>
+          <Link href={"/"} className="text-white" title="Home">
+            <Home />
+          </Link>
+          <Link href={"/"} className="text-white" title="Home">
+            <Home />
+          </Link>
+          <Link href={"/profile"} className="text-white" title="Home">
+            <User />
+          </Link>
+        </nav>
       </body>
     </html>
   );
