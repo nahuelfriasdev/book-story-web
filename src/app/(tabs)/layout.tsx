@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <body
+      <main
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
@@ -42,6 +42,6 @@ export default function RootLayout({
             <User />
           </Link>
         </nav>
-      </body>
+      </main>
   );
 }

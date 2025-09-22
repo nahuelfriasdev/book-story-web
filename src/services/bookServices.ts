@@ -24,7 +24,8 @@ export const fetchBooks = async (query: string) => {
   }
 };
 
-export const addBook = async ({
+export const addPost = async ({
+  id,
   uid, 
   authors, 
   thumbnail, 
@@ -33,7 +34,8 @@ export const addBook = async ({
   review,
 }: BooksPropsType) => {
   try {
-    await setDoc(doc(firestore, "books", `${uid}_${title}`), {
+    await setDoc(doc(firestore, "posts", `${uid}_${title}`), {
+      id,
       title,
       authors, 
       thumbnail, 
@@ -52,30 +54,48 @@ export const addBook = async ({
   }
 }
 
-export const getBooksByUser = async (uid:string) => {
+export const getPostsByUser = async (uid:string) => {
   try {
-    // Referencia a la colección "books"
-    const booksRef = collection(firestore, "books");
+    const postsRef = collection(firestore, "posts");
 
-    // Creamos la consulta
     const q = query(
-      booksRef, 
+      postsRef, 
       where("uid", "==", uid),
       orderBy("createdAt", "desc")
     );
 
-    // Ejecutamos la consulta
     const querySnapshot = await getDocs(q);
 
-    // Convertimos los resultados a un array
-    const books = querySnapshot.docs.map(doc => ({
+    const posts = querySnapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
     }));
 
-    return books;
+    return posts;
   } catch (error) {
-    console.error("Error fetching books: ", error);
+    console.error("Error fetching posts: ", error);
     return [];
+  }
+}
+
+export const getPostById = async (id:string, uid:string) => {
+  try {
+    const postRef = collection(firestore, "posts");
+    const q = query(
+      postRef, 
+      where("uid", "==", uid),
+      where("id", "==", id)
+    );
+
+    const postSnap = await getDocs(q);
+
+    if (postSnap.empty) {
+      console.log("No matching documents.");
+      return null;
+    }
+    return postSnap.docs[0].data();
+  } catch (error) {
+    console.error("Error fetching post by ID: ", error);
+    return null;
   }
 }

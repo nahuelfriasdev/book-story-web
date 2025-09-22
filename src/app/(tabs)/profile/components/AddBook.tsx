@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { addBook, fetchBooks } from "@/services/bookServices"
+import { addPost, fetchBooks } from "@/services/bookServices"
 import Image from "next/image"
 import { useAuth } from "@/contexts/authContext"
 import { BooksPropsType } from "../../../../../types"
@@ -46,6 +46,7 @@ const AddBook = ({ onBookAdded }: AddBookProps) => {
     if (!user?.uid || !selectedBook) return;
 
     const data = {
+      id:selectedBook.id,
       uid: user.uid,
       authors: Array.isArray(selectedBook.authors) ? selectedBook.authors[0] : selectedBook.authors,
       thumbnail: Array.isArray(selectedBook.thumbnail) ? selectedBook.thumbnail[0] : selectedBook.thumbnail,
@@ -54,7 +55,7 @@ const AddBook = ({ onBookAdded }: AddBookProps) => {
       review
     }
 
-    const res = await addBook(data)
+    const res = await addPost(data)
 
     if(!res.success) {
       alert(res.msg)

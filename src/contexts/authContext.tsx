@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { AuthContextType, UserType } from "../../types";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { auth, firestore } from "../config/firebase";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 
 const AuthContext = createContext<AuthContextType | null>(null)
@@ -55,7 +55,8 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({children}) 
       await setDoc(doc(firestore, "users", response?.user?.uid), {
         name,
         email,
-        uid: response?.user?.uid
+        uid: response?.user?.uid,
+        createdAt: serverTimestamp()
       })
       return {success: true}
     } catch(error: unknown) {

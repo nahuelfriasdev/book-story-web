@@ -166,6 +166,7 @@ export type BookType = {
 }
 
 export type BooksPropsType = {
+  id?: string,
   uid?: string, 
   authors?: string | string[], 
   thumbnail?: string | string[], 
