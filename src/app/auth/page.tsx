@@ -3,6 +3,10 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/authContext";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +33,7 @@ export default function Home() {
   return (
     <>
       <main className="flex w-[100%] h-[100vh]">
-        <section className="flex flex-col flex-2 justify-between items-center py-3">
+        {/* <section className="flex flex-col flex-2 justify-between items-center py-3">
           <h1 className="w-[100%] text-5xl">BOOKSTORY</h1>
           <Image 
             src="/book-stack.png"
@@ -45,21 +49,50 @@ export default function Home() {
             <h2>Encontrá personas que leen como vos</h2>
           </article>
 
-        </section>
-        <section className="flex bg-[#4ade80] flex-1 justify-center items-center">
-          <article className="bg-white w-[75%] h-[75%] rounded-4xl flex flex-col">
-            <div className="flex items-center text-center w-[100%] border-b-1 border-gray-200">
-              <button className="w-full p-4 border-r-1 border-gray-200 hover:bg-amber-200 rounded-tl-4xl">Iniciar Sesion</button>
-              <button className="w-full p-4 hover:bg-amber-200 rounded-tr-4xl">Registrarme</button>
-            </div>
-            
-            <div className="flex flex-col gap-y-4 items-center justify-center mt-10">
-              <input onChange={e => emailRef.current = e.target.value} type="text" placeholder="Email" className="border px-1 py-2 border-[#4ade80] rounded-sm w-[70%]" />
-              <input onChange={e => passwordRef.current = e.target.value} type="password" placeholder="Contraseña" className="border px-1 py-2 border-[#4ade80] rounded-sm w-[70%]" />
-              <button type="button" className="bg-[#4ade80] w-[70%] rounded-md p-2 cursor-pointer" onClick={handleSubmit}>Iniciar</button>
-            </div>
-          </article>
-        </section>
+        </section> */}
+        <section className="flex bg-green-400 flex-1 justify-center items-center min-h-screen p-4">
+      <Card className="w-full max-w-md rounded-3xl shadow-lg">
+        <CardHeader className="pb-0">
+          <CardTitle className="text-center text-2xl font-semibold">
+            Bienvenido
+          </CardTitle>
+        </CardHeader>
+
+        <Tabs defaultValue="login" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 rounded-lg bg-gray-100">
+            <TabsTrigger value="login">Iniciar Sesión</TabsTrigger>
+            <TabsTrigger disabled value="register">Registrarme</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="login">
+            <CardContent className="flex flex-col gap-4 mt-6">
+              <Input
+                placeholder="Email"
+                type="email"
+                onChange={(e) => (emailRef.current = e.target.value)}
+              />
+              <Input
+                placeholder="Contraseña"
+                type="password"
+                onChange={(e) => (passwordRef.current = e.target.value)}
+              />
+              <Button variant="default" onClick={handleSubmit}>
+                Iniciar
+              </Button>
+            </CardContent>
+          </TabsContent>
+
+          <TabsContent value="register">
+            <CardContent className="flex flex-col gap-4 mt-6">
+              <Input placeholder="Email" type="email" />
+              <Input placeholder="Contraseña" type="password" />
+              <Input placeholder="Nombre" type="text" />
+              <Button variant="default">Registrarme</Button>
+            </CardContent>
+          </TabsContent>
+        </Tabs>
+      </Card>
+    </section>
       </main>
 
     </>
