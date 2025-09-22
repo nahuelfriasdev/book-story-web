@@ -1,4 +1,6 @@
-export const getProfileImage = (file:any) => {
+import { ProfileImageProps } from "../../types";
+
+export const getProfileImage = (file:ProfileImageProps) => {
   if(file && typeof file === 'string') return file;
   if(file && typeof file === 'object') return file.uri;
 

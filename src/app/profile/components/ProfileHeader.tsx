@@ -9,7 +9,7 @@ const ProfileHeader = () => {
   return (
     <section className="p-4 flex flex-col items-center gap-y-2">
       <Image 
-        src={getProfileImage(user?.image)}
+        src={getProfileImage(user?.image ?? "/defaultAvatar.png") || "/defaultAvatar.png"}
         alt="una pila de libros"
         width={100}
         height={100}

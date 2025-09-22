@@ -37,10 +37,13 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({children}) 
       await signInWithEmailAndPassword(auth, email, password);
       console.log("login success")
       return {success: true}
-    } catch(error: any) {
+    } catch(error: unknown) {
       console.log("login bad")
 
-      const msg = error.message;
+      let msg = "An error occurred";
+      if (error && typeof error === "object" && "message" in error) {
+        msg = (error as { message: string }).message;
+      }
    
       return { success: false, msg}
     }
@@ -55,9 +58,12 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({children}) 
         uid: response?.user?.uid
       })
       return {success: true}
-    } catch(error: any) {
-      let msg = error.message;
-      if(msg.include("/(auth/email-alredy-in-use)")) msg = "El email esta en uso"
+    } catch(error: unknown) {
+      let msg = "An error occurred";
+      if (error && typeof error === "object" && "message" in error) {
+        msg = (error as { message: string }).message;
+        if (msg.includes("/(auth/email-alredy-in-use)")) msg = "El email esta en uso";
+      }
       return { success: false, msg}
     }
   };
@@ -76,7 +82,7 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({children}) 
         }
         setUser({...userData})
       }
-    } catch(error: any) {
+    } catch(error: unknown) {
       console.log("error:", error)
     }
   }

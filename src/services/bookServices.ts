@@ -10,7 +10,7 @@ export const fetchBooks = async (query: string) => {
     );
     const data = await response.data;
 
-    return data.items?.map((item: any) => ({
+    return data.items?.map((item: {id:string, volumeInfo: {title: string, authors: string, imageLinks: {thumbnail: string}, description: string}}) => ({
       id: item.id,
       title: item.volumeInfo.title,
       authors: item.volumeInfo.authors || [],
@@ -43,8 +43,11 @@ export const addBook = async ({
       createdAt: serverTimestamp()
     })
     return {success: true}
-  } catch(error: any) {
-    const msg = error.message;
+  } catch(error: unknown) {
+    let msg = "An unknown error occurred";
+    if (error instanceof Error) {
+      msg = error.message;
+    }
     return { success: false, msg}
   }
 }

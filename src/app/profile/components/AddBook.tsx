@@ -11,9 +11,10 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { addBook, fetchBooks, getBooksByUser } from "@/services/bookServices"
+import { addBook, fetchBooks } from "@/services/bookServices"
 import Image from "next/image"
 import { useAuth } from "@/contexts/authContext"
+import { BooksPropsType } from "../../../../types"
 
 type AddBookProps = {
   onBookAdded?: () => void;  // 👈 nuevo prop
@@ -22,8 +23,8 @@ type AddBookProps = {
 const AddBook = ({ onBookAdded }: AddBookProps) => {
   const {user} = useAuth();
   const [title, setTitle] = useState("")
-  const [books, setBooks] = useState<any[]>([])
-  const [selectedBook, setSelectedBook] = useState<any>(null)
+  const [books, setBooks] = useState<BooksPropsType[]>([])
+  const [selectedBook, setSelectedBook] = useState<BooksPropsType | null>(null)
   const [isOpen, setIsOpen] = useState(false)
   const [dialog, setDialog] = useState(false)
   const [rating, setRating] = useState(0);
@@ -35,14 +36,14 @@ const AddBook = ({ onBookAdded }: AddBookProps) => {
     console.log(res);
   }
 
-  const handleSelectBook = (book: any) => {
+  const handleSelectBook = (book: BooksPropsType) => {
     setSelectedBook(book)
     console.log(book);
     setIsOpen(true)
   }
 
   const handleAddReview = async () => {
-    if(!user?.uid) return;
+    if (!user?.uid || !selectedBook) return;
 
     const data = {
       uid: user.uid,
@@ -116,8 +117,8 @@ const AddBook = ({ onBookAdded }: AddBookProps) => {
                   <button key={index} className="flex gap-2 cursor-pointer" type="button" onClick={() => handleSelectBook(book)}>
                     {book.thumbnail && (
                       <Image 
-                        src={book.thumbnail}
-                        alt={book.title}
+                        src={Array.isArray(book.thumbnail) ? book.thumbnail[0] : book.thumbnail}
+                        alt={typeof book.title === "string" ? book.title : Array.isArray(book.title) ? book.title[0] ?? "Book cover" : "Book cover"}
                         width={50}
                         height={75}
                         className="object-cover rounded-lg"
@@ -132,8 +133,20 @@ const AddBook = ({ onBookAdded }: AddBookProps) => {
             <div>
               <div className="flex gap-4 mb-4">
                 <Image 
-                  src={selectedBook?.thumbnail || "/book-stack.png"}
-                  alt={selectedBook?.title}
+                  src={
+                    selectedBook?.thumbnail
+                      ? Array.isArray(selectedBook.thumbnail)
+                        ? selectedBook.thumbnail[0]
+                        : selectedBook.thumbnail
+                      : "/book-stack.png"
+                  }
+                  alt={
+                    typeof selectedBook?.title === "string"
+                      ? selectedBook.title
+                      : Array.isArray(selectedBook?.title)
+                        ? selectedBook.title[0] ?? "Book cover"
+                        : "Book cover"
+                  }
                   width={100}
                   height={150}
                   className="object-cover rounded-lg"

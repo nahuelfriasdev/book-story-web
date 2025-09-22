@@ -1,9 +1,5 @@
 "use client"
-import { useRouter } from "next/navigation";
-import { useAuth } from "../../contexts/authContext";
-
 const Home = () => {
-  const {user} = useAuth();
 
   return (
     <div>
