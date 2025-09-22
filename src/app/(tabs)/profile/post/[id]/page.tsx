@@ -50,7 +50,7 @@ export default function BookPage() {
           <h1 className="text-2xl font-bold mb-2 text-center">{book?.title}</h1>
           <Image 
             src={
-              Array.isArray(book?.thumbnail) ? book?.thumbnail[0] : book?.thumbnail || "/defaultBook.png"
+              Array.isArray(book?.thumbnail) ? book?.thumbnail[0] : book?.thumbnail || "/book-stack.png"
             } 
             alt={
               Array.isArray(book?.title) ? book?.title[0] : book?.title || "Portada de libro"
