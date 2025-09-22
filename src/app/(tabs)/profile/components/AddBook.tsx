@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input"
 import { addBook, fetchBooks } from "@/services/bookServices"
 import Image from "next/image"
 import { useAuth } from "@/contexts/authContext"
-import { BooksPropsType } from "../../../../types"
+import { BooksPropsType } from "../../../../../types"
 
 type AddBookProps = {
   onBookAdded?: () => void;  // 👈 nuevo prop
