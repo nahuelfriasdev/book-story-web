@@ -17,7 +17,7 @@ const ProfileHeader = () => {
       />
 
 
-      <p className="text-xl font-medium">Nahuel Frias</p>
+      <p className="text-xl font-medium">{user?.name}</p>
     </section>
 
   )
