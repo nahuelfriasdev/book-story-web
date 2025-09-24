@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
-import { Home, User } from "lucide-react";
+import { Home, Settings, User } from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
       <main
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased pb-16`}
       >
         {children}
         <nav className="flex justify-around p-4 text-center text-sm text-gray-500 bg-neutral-800 fixed bottom-0 w-full">
@@ -40,6 +40,9 @@ export default function RootLayout({
           </Link>
           <Link href={"/profile"} className="text-white" title="Home">
             <User />
+          </Link>
+          <Link href={"/setting"} className="text-white" title="Home">
+            <Settings />
           </Link>
         </nav>
       </main>

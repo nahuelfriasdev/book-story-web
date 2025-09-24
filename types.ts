@@ -179,3 +179,9 @@ export type BooksPropsType = {
 export type ProfileImageProps = {
   uri?: string
 }
+
+export type PostCardPropsType = {
+  user: UserType,
+  image: string,
+  post?: BooksPropsType
+}
