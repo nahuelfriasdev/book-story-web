@@ -9,7 +9,7 @@ export const fetchBooks = async (query: string) => {
       `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}`
     );
     const data = await response.data;
-
+    console.log("data",data)
     return data.items?.map((item: {id:string, volumeInfo: {title: string, authors: string, imageLinks: {thumbnail: string}, description: string}}) => ({
       id: item.id,
       title: item.volumeInfo.title,
@@ -34,9 +34,12 @@ export const addPost = async ({
   review,
 }: BooksPropsType) => {
   try {
-    await setDoc(doc(firestore, "posts", `${uid}_${title}`), {
+    const titleFormat = Array.isArray(title) ? title[0]?.toLocaleLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '') : title?.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+    const titleTrimmed = titleFormat?.trim();
+    console.log("titleTrimmed", titleTrimmed)
+    await setDoc(doc(firestore, "posts", `${uid}_${titleTrimmed}`), {
       id,
-      title,
+      titleTrimmed,
       authors, 
       thumbnail, 
       review,
