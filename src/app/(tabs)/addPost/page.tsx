@@ -16,11 +16,7 @@ import Image from "next/image"
 import { useAuth } from "@/contexts/authContext"
 import { BooksPropsType } from "../../../../types"
 
-type AddBookProps = {
-  onBookAdded?: () => void;  // 👈 nuevo prop
-};
-
-const AddPost = ({ onBookAdded }: AddBookProps) => {
+const AddPost = () => {
   const {user} = useAuth();
   const [title, setTitle] = useState("")
   const [books, setBooks] = useState<BooksPropsType[]>([])
@@ -67,9 +63,6 @@ const AddPost = ({ onBookAdded }: AddBookProps) => {
     setBooks([]);
     setSelectedBook(null);
 
-    if (onBookAdded) {
-      onBookAdded();        // 👈 avisamos al padre que refresque
-    }
   }
 
   return (
