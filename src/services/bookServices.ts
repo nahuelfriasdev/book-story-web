@@ -71,6 +71,13 @@ export const getPostsByUser = async (uid:string) => {
 
     const posts = querySnapshot.docs.map(doc => ({
       id: doc.id,
+      uid: doc.data().uid, 
+      authors: doc.data().authors, 
+      thumbnail: doc.data().thumbnail, 
+      title: doc.data().title,
+      review: doc.data().review,
+      rating: doc.data().rating,
+      createdAt: doc.data().createdAt,
       ...doc.data()
     }));
 

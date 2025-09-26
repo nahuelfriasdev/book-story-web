@@ -19,7 +19,8 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({children}) 
         setUser({
           uid: firebaseUser?.uid,
           email: firebaseUser?.email,
-          name: firebaseUser?.displayName
+          name: firebaseUser?.displayName,
+          username:""
         })
         updateUserData(firebaseUser.uid);
         router.push("/home")
@@ -79,7 +80,8 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({children}) 
           uid: data?.uid,
           email: data.email || null,
           name: data.name || null,
-          image: data.image || null
+          image: data.image || null,
+          username: data.username || null,
         }
         setUser({...userData})
       }

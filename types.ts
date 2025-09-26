@@ -119,6 +119,7 @@ export type UserType = {
   email?: string | null;
   name: string | null;
   image?: unknown;
+  username: string;
 } | null;
 
 export type UserDataType = {
@@ -164,6 +165,17 @@ export type BookType = {
   thumbnail: string, 
   title: string
 }
+
+export type Post = {
+  id: string;
+  image?: string;
+  username:string;
+};
+
+
+export type ProfileBooksProps = {
+  posts: Post[];
+};
 
 export type BooksPropsType = {
   id?: string,

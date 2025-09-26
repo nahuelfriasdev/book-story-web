@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
-import { Home, Settings, User } from "lucide-react";
+import { CirclePlus, Home, Search, Settings, User } from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,11 +32,11 @@ export default function RootLayout({
           <Link href={"/home"} className="text-white" title="Home">
             <Home />
           </Link>
-          <Link href={"/"} className="text-white" title="Home">
-            <Home />
+          <Link href={"/search"} className="text-white" title="search">
+            <Search />
           </Link>
-          <Link href={"/"} className="text-white" title="Home">
-            <Home />
+          <Link href={"/addPost"} className="text-white" title="Home">
+            <CirclePlus />
           </Link>
           <Link href={"/profile"} className="text-white" title="Home">
             <User />
