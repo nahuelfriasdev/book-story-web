@@ -20,7 +20,7 @@ type AddBookProps = {
   onBookAdded?: () => void;  // 👈 nuevo prop
 };
 
-const AddBook = ({ onBookAdded }: AddBookProps) => {
+const AddPost = ({ onBookAdded }: AddBookProps) => {
   const {user} = useAuth();
   const [title, setTitle] = useState("")
   const [books, setBooks] = useState<BooksPropsType[]>([])
@@ -173,4 +173,4 @@ const AddBook = ({ onBookAdded }: AddBookProps) => {
   )
 }
 
-export default AddBook
+export default AddPost
