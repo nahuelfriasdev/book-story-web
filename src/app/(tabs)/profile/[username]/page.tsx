@@ -9,7 +9,7 @@ import { getPostsByUser } from "@/services/bookServices";
 
 const Profile = () => {
   const [user, setUser] = useState<{id:string, username: string, image?: string}[]>([]);
-  const [allpost, setAllPost] = useState<{id:string, image:string}[]>([]);
+  const [allpost, setAllPost] = useState<{id:string, image:string, username:string}[]>([]);
   const {username} = useParams();
 
   const getUserInfo = () => {
