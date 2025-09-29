@@ -117,9 +117,10 @@ export type IconProps = {
 export type UserType = {
   uid?: string;
   email?: string | null;
-  name: string | null;
+  name?: string | null;
   image?: unknown;
-  username: string;
+  username?: string;
+  username_lowercase?: string;
 } | null;
 
 export type UserDataType = {
@@ -137,7 +138,8 @@ export type AuthContextType = {
   register: (
     email: string,
     password: string,
-    name: string
+    name: string,
+    username: string
   ) => Promise<{ success: boolean; msg?: string }>;
   updateUserData: (userId: string) => Promise<void>;
 };
@@ -169,7 +171,7 @@ export type BookType = {
 export type Post = {
   id: string;
   image?: string;
-  username:string;
+  username?:string;
 };
 
 

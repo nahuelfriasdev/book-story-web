@@ -4,8 +4,6 @@ import { Star } from "lucide-react";
 
 const PostCard = ({user, image, post}: PostCardPropsType) => {
   if(!user) return null;
-  console.log("post in post card", post)
-
   const postImage = Array.isArray(post?.thumbnail) ? post?.thumbnail[0] : post?.thumbnail
 
   return(

@@ -20,7 +20,8 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({children}) 
           uid: firebaseUser?.uid,
           email: firebaseUser?.email,
           name: firebaseUser?.displayName,
-          username:""
+          username:"",
+          username_lowercase:""
         })
         updateUserData(firebaseUser.uid);
         router.push("/home")
@@ -50,11 +51,13 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({children}) 
     }
   }
 
-  const register = async (email: string, password: string, name:string) => {
+  const register = async (email: string, password: string, name:string, username:string) => {
     try {
       const response = await createUserWithEmailAndPassword(auth, email, password);
       await setDoc(doc(firestore, "users", response?.user?.uid), {
         name,
+        username: username,
+        username_lowercase: username.toLocaleLowerCase(),
         email,
         uid: response?.user?.uid,
         createdAt: serverTimestamp()
@@ -82,6 +85,7 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({children}) 
           name: data.name || null,
           image: data.image || null,
           username: data.username || null,
+          username_lowercase: data.username_lowercase || null,
         }
         setUser({...userData})
       }

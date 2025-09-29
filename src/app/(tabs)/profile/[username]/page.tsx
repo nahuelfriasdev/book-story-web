@@ -6,9 +6,10 @@ import ProfileHeader from "../components/ProfileHeader";
 import { useEffect, useState } from "react";
 import { getUsers } from "@/services/userServices";
 import { getPostsByUser } from "@/services/bookServices";
+import { UserType } from "../../../../../types";
 
 const Profile = () => {
-  const [user, setUser] = useState<{id:string, username: string, image?: string}[]>([]);
+  const [user, setUser] = useState<UserType>();
   const [allpost, setAllPost] = useState<{id:string, image:string, username:string}[]>([]);
   const {username} = useParams();
 
@@ -16,8 +17,8 @@ const Profile = () => {
     const data = getUsers(username?.toString() || "");
     data.then((res) => {
       if (res.length > 0) {
-        setUser(res);
-        const posts = getPostsByUser(res[0].id);
+        setUser(res[0]);
+        const posts = getPostsByUser(res[0].uid);
         posts.then((postRes) => {
           if (postRes.length > 0) {
            const allPostRes = postRes.map((post: {id:string, thumbnail?:string}) => ({
@@ -38,7 +39,15 @@ const Profile = () => {
 
   return (
     <>
-      <ProfileHeader username={user[0]?.username} image={user[0]?.image}/>
+      {user && (
+        <ProfileHeader
+          uid={user.uid}
+          email={user.email}
+          name={user.name}
+          image={user.image}
+          username={user.username}
+        />
+      )}
       <ProfileBooks posts={allpost}/>
     </>
   )

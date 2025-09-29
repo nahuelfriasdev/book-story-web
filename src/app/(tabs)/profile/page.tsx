@@ -6,9 +6,8 @@ import { useEffect, useState } from "react";
 import { getPostsByUser } from "@/services/bookServices";
 
 const Profile = () => {
-  const [allPost, setAllPost] = useState<{id:string, image:string, username:string}[]>([]);
+  const [allPost, setAllPost] = useState<{id:string, image:string, username?:string}[]>([]);
   const {user} = useAuth();
-  console.log(user)
   const getPost = () => {
     if(!user) return;
     const posts = getPostsByUser(user?.uid || "");

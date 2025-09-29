@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ProfileBooksProps } from "../../../../../types";
 
 const ProfileBooks = ({posts}: ProfileBooksProps) => {
-  console.log("posts",posts)
   return (  
     <section className="h-[100dvh] p-2">
       <div className="grid grid-cols-3 gap-2 p-2">
