@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 const Search = () => {
-  const [users, setUsers] = useState<{ id: string, username: string, image: string }[]>([])
+  const [users, setUsers] = useState<{ uid: string, username: string, image: string }[]>([])
 
 
   const handleSearch = async (username: string) => {
