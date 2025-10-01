@@ -48,6 +48,7 @@ const AddBook = ({ onBookAdded }: AddBookProps) => {
     const data = {
       id:selectedBook.id,
       uid: user.uid,
+      username: user.username_lowercase,
       authors: Array.isArray(selectedBook.authors) ? selectedBook.authors[0] : selectedBook.authors,
       thumbnail: Array.isArray(selectedBook.thumbnail) ? selectedBook.thumbnail[0] : selectedBook.thumbnail,
       title: selectedBook.title,

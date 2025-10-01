@@ -1,11 +1,26 @@
-import Image from "next/image";
-import { PostCardPropsType } from "../../types";
-import { Star } from "lucide-react";
+"use client"
 
-const PostCard = ({user, image, post}: PostCardPropsType) => {
+import Image from "next/image";
+import { PostCardPropsType, UserType } from "../../types";
+import { Star } from "lucide-react";
+import { useEffect, useState } from "react";
+import { getUsers } from "@/services/userServices";
+
+const PostCard = ({image, post}: PostCardPropsType) => {
+  const [user, setUser] = useState<UserType>()
+
+  const getUser = async () => {
+    if(!post?.username) return;
+    const res = await getUsers(post?.username)
+    setUser(res[0])
+  }
+
+  useEffect(() => {
+    getUser()
+  }, [user])
+
   if(!user) return null;
   const postImage = Array.isArray(post?.thumbnail) ? post?.thumbnail[0] : post?.thumbnail
-
   return(
     <article key={user.name}>
       <header className="p-3 border-b border-gray-200 flex items-center gap-x-2">

@@ -1,5 +1,7 @@
 import { firestore } from "@/config/firebase";
-import { addDoc, collection, deleteDoc, doc, getDocs, query, serverTimestamp, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, serverTimestamp, where } from "firebase/firestore";
+import { getPostsByUser } from "./bookServices";
+import { BooksPropsType } from "../../types";
 
 export async function getUsers (username: string) {
   try {
@@ -80,13 +82,12 @@ export async function getFollowInfo(uid: string, userId: string) {
       uid: doc.id,
     }))
 
-    console.log("follow: ",follow.length > 0)
-
     return follow.length > 0;  
-
   } catch (error) {
     console.error("Error following user: ", error);
   }
 }
+
+
 
 

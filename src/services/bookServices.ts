@@ -27,6 +27,7 @@ export const fetchBooks = async (query: string) => {
 export const addPost = async ({
   id,
   uid, 
+  username,
   authors, 
   thumbnail, 
   title,
@@ -44,7 +45,7 @@ export const addPost = async ({
       thumbnail, 
       review,
       rating,
-      uid,
+      username,
       createdAt: serverTimestamp()
     })
     return {success: true}

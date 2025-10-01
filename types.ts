@@ -142,6 +142,7 @@ export type AuthContextType = {
     username: string
   ) => Promise<{ success: boolean; msg?: string }>;
   updateUserData: (userId: string) => Promise<void>;
+  getFollowersPost: (userId: string) => Promise<BooksPropsType[]>;
 };
 
 export type ResponseType = {
@@ -182,6 +183,7 @@ export type ProfileBooksProps = {
 export type BooksPropsType = {
   id?: string,
   uid?: string, 
+  username?: string;
   authors?: string | string[], 
   thumbnail?: string | string[], 
   title?: string | string[],
