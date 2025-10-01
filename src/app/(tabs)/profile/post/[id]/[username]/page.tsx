@@ -21,7 +21,7 @@ export default function BookPage() {
     const userData = await getUsers(params.username ?? "");
     if(!userData || userData.length === 0) return;
     setUser(userData[0])
-    const postData = await getPostById(params.id, userData[0].id);
+    const postData = await getPostById(params.id, userData[0].uid);
     if(!postData) return;
     setPost(postData)
   }
