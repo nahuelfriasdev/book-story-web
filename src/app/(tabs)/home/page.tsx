@@ -17,7 +17,6 @@ const Home = () => {
 
     if(!user.uid) return;
     const data = await getFollowersPost(user?.uid ?? "")
-    console.log("data:", data)
     setPost(data)
   }
 

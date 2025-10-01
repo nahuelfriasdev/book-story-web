@@ -197,7 +197,7 @@ export type ProfileImageProps = {
 }
 
 export type PostCardPropsType = {
-  user: UserType,
+  user?: UserType,
   image: string,
   post?: BooksPropsType
 }

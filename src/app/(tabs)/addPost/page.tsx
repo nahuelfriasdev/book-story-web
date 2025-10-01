@@ -29,12 +29,10 @@ const AddPost = () => {
   const handleSearch = async () => {
     const res = await fetchBooks(title)
     setBooks(res)
-    console.log(res);
   }
 
   const handleSelectBook = (book: BooksPropsType) => {
     setSelectedBook(book)
-    console.log(book);
     setIsOpen(true)
   }
 

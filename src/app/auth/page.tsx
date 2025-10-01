@@ -14,6 +14,8 @@ export default function Home() {
   const emailRef = useRef("");
   const nameRef = useRef("");
   const passwordRef = useRef("");
+  const usernameRef = useRef("");
+
   const {login: loginUser, register: registerUser} = useAuth();
 
   const handleSubmit = async () => {
@@ -37,7 +39,7 @@ export default function Home() {
     }
 
     setIsLoading(true)
-    const res = await registerUser(emailRef.current, passwordRef.current, nameRef.current)
+    const res = await registerUser(emailRef.current, passwordRef.current, nameRef.current, usernameRef.current)
     setIsLoading(false)
     if(!res.success) {
       alert(res.msg)
@@ -84,6 +86,7 @@ export default function Home() {
                   <Input placeholder="Email" type="email" onChange={(e) => (emailRef.current = e.target.value)}/>
                   <Input placeholder="Contraseña" type="password" onChange={(e) => (passwordRef.current = e.target.value)}/>
                   <Input placeholder="Nombre" type="text" onChange={(e) => (nameRef.current = e.target.value)}/>
+                  <Input placeholder="Usuario" type="text" onChange={(e) => (usernameRef.current = e.target.value)}/>
                   <Button variant="default" onClick={handleRegister}>Registrarme</Button>
                 </CardContent>
               </TabsContent>

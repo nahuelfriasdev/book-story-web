@@ -17,7 +17,7 @@ const PostCard = ({image, post}: PostCardPropsType) => {
 
   useEffect(() => {
     getUser()
-  }, [user])
+  }, [user?.uid])
 
   if(!user) return null;
   const postImage = Array.isArray(post?.thumbnail) ? post?.thumbnail[0] : post?.thumbnail

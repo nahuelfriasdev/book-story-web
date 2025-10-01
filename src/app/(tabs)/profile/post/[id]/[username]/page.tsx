@@ -13,7 +13,6 @@ export default function BookPage() {
   const [user, setUser] = useState<UserType>()
 
   const params = useParams<{ id: string, username:string }>();
-  console.log("Params:", params);
 
   const profileImage = getProfileImage(user?.image ?? "/defaultAvatar.png") ?? "/defaultAvatar.png"
 
@@ -28,12 +27,12 @@ export default function BookPage() {
 
   useEffect(() => {
     getUserData()
-  },[params.id, user?.uid])
+  },[user?.uid])
 
   return (
     <>
-      {user && (
-        <PostCard user={user} image={profileImage} post={post}/>
+      {post && (
+        <PostCard image={profileImage} post={post}/>
       )}
     </>
   )

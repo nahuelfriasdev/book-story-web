@@ -24,8 +24,6 @@ const ProfileHeader = (users: UserType) => {
 
   useEffect(() => {
     checkFollow()
-    console.log("users:",users)
-    console.log("mi user:",user)
   },[isFollowing])
 
   return (
