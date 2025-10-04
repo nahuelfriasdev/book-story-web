@@ -34,9 +34,9 @@ const Home = () => {
           })}
         </header>
           
-        {post.map((item) => {
+        {post.map((item, index) => {
             return (
-            <PostCard key={item.id} user={user} image={profileImage} post={item}/>
+            <PostCard key={index} user={user} image={profileImage} post={item}/>
             )
           })
         }
